@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZVV Zwart - Wit | Lotings App</title>
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- PIN Lock Screen Overlay -->
+    <div id="pin-screen" class="pin-screen">
+        <div class="pin-container" id="pin-container">
+            <div class="logo-area">
+                <span class="logo-icon" style="animation: none;">🔒</span>
+                <h1>BEVEILIGD</h1>
+                <p class="subtitle">Voer pincode in</p>
+            </div>
+            
+            <div class="pin-dots" id="pin-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            
+            <div class="pin-keypad">
+                <button class="pin-key" data-val="1">1</button>
+                <button class="pin-key" data-val="2">2</button>
+                <button class="pin-key" data-val="3">3</button>
+                <button class="pin-key" data-val="4">4</button>
+                <button class="pin-key" data-val="5">5</button>
+                <button class="pin-key" data-val="6">6</button>
+                <button class="pin-key" data-val="7">7</button>
+                <button class="pin-key" data-val="8">8</button>
+                <button class="pin-key" data-val="9">9</button>
+                <button class="pin-key pin-key-action" data-val="clear" title="Wissen">C</button>
+                <button class="pin-key" data-val="0">0</button>
+                <button class="pin-key pin-key-action" data-val="backspace" title="Backspace">⌫</button>
+            </div>
+            
+            <div class="pin-message" id="pin-message">Pincode vereist voor toegang</div>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <!-- Floating background elements for rich aesthetics -->
+        <div class="bg-glow glow-1"></div>
+        <div class="bg-glow glow-2"></div>
+
+        <!-- Theme Toggle Button -->
+        <button id="btn-theme" class="btn-theme" aria-label="Wissel thema">
+            <span class="theme-icon" id="theme-icon">🌙</span>
+        </button>
+
+        <header>
+            <div class="logo-area">
+                <span class="logo-icon">⚽</span>
+                <h1>ZVV ZWART - WIT</h1>
+                <p class="subtitle">Interactieve Lotings & Rouleer App</p>
+            </div>
+        </header>
+
+        <main>
+            <!-- Step 1: Selection Panel -->
+            <section class="panel selection-panel">
+                <div class="panel-header">
+                    <h2>1. Selecteer Spelers</h2>
+                    <p class="instructions">Vink de 12 spelers aan die vandaag meespelen. Klik op de rol (Speler/Keeper) van een speler om deze aan te passen indien nodig.</p>
+                </div>
+
+                <!-- Status Dashboard -->
+                <div class="status-dashboard">
+                    <div class="status-card" id="card-total">
+                        <span class="status-label">Totaal Geselecteerd</span>
+                        <span class="status-value"><span id="count-total">0</span>/12</span>
+                        <div class="status-bar"><div class="progress" id="bar-total"></div></div>
+                    </div>
+                    <div class="status-card" id="card-keepers">
+                        <span class="status-label">Keepers</span>
+                        <span class="status-value"><span id="count-keepers">0</span>/2</span>
+                        <div class="status-bar"><div class="progress" id="bar-keepers"></div></div>
+                    </div>
+                    <div class="status-card" id="card-players">
+                        <span class="status-label">Veldspelers</span>
+                        <span class="status-value"><span id="count-players">0</span>/10</span>
+                        <div class="status-bar"><div class="progress" id="bar-players"></div></div>
+                    </div>
+                </div>
+
+                <!-- Player Selection Grid -->
+                <div class="player-grid" id="player-grid">
+                    <!-- Dynamic rendering in app.js -->
+                </div>
+
+                <div class="selection-actions">
+                    <button id="btn-clear" class="btn btn-secondary">Wis Selectie</button>
+                    <button id="btn-default" class="btn btn-secondary">Herstel Standaard</button>
+                </div>
+            </section>
+
+            <!-- Step 2: Action Button -->
+            <div class="action-container">
+                <button id="btn-draw" class="btn-draw" disabled>
+                    <span class="btn-draw-text">LOTEN</span>
+                    <span class="btn-draw-glow"></span>
+                </button>
+                <p id="draw-warning" class="draw-warning">Selecteer exact 12 spelers (waarvan 2 keepers en 10 veldspelers) om te loten.</p>
+            </div>
+
+            <!-- Step 3: Results Panel (hidden initially) -->
+            <section class="panel results-panel hidden" id="results-panel">
+                <div class="panel-header">
+                    <h2>2. Teamindeling & Rouleer Schema</h2>
+                    <p class="instructions">De teams zijn geloot! Bekijk hieronder de opstellingen en het wisselschema.</p>
+                </div>
+
+                <div class="teams-container">
+                    <!-- Team WIT -->
+                    <div class="team-column team-white">
+                        <div class="team-header">
+                            <span class="team-badge">WIT</span>
+                            <h3>Team WIT</h3>
+                        </div>
+                        
+                        <div class="team-roster">
+                            <div class="roster-section">
+                                <h4>Keeper</h4>
+                                <div class="player-card keeper-card" id="team-white-keeper">
+                                    <!-- Keeper card -->
+                                </div>
+                            </div>
+                            
+                            <div class="roster-section">
+                                <h4>Startende Veldspelers</h4>
+                                <div class="roster-grid" id="team-white-starters">
+                                    <!-- 4 starters -->
+                                </div>
+                            </div>
+
+                            <div class="roster-section">
+                                <h4>Bank / Reserve</h4>
+                                <div class="player-card bench-card" id="team-white-bench">
+                                    <!-- 1 reserve -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rotation Schedule -->
+                        <div class="rotation-section">
+                            <h4>🔄 Rouleerschema (Elke 5 min)</h4>
+                            <div class="rotation-timeline" id="team-white-rotation">
+                                <!-- Rotation steps -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team ZWART -->
+                    <div class="team-column team-black">
+                        <div class="team-header">
+                            <span class="team-badge">ZWART</span>
+                            <h3>Team ZWART</h3>
+                        </div>
+                        
+                        <div class="team-roster">
+                            <div class="roster-section">
+                                <h4>Keeper</h4>
+                                <div class="player-card keeper-card" id="team-black-keeper">
+                                    <!-- Keeper card -->
+                                </div>
+                            </div>
+                            
+                            <div class="roster-section">
+                                <h4>Startende Veldspelers</h4>
+                                <div class="roster-grid" id="team-black-starters">
+                                    <!-- 4 starters -->
+                                </div>
+                            </div>
+
+                            <div class="roster-section">
+                                <h4>Bank / Reserve</h4>
+                                <div class="player-card bench-card" id="team-black-bench">
+                                    <!-- 1 reserve -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rotation Schedule -->
+                        <div class="rotation-section">
+                            <h4>🔄 Rouleerschema (Elke 5 min)</h4>
+                            <div class="rotation-timeline" id="team-black-rotation">
+                                <!-- Rotation steps -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 ZVV Zwart - Wit &bull; Ontworpen met Passie</p>
+        </footer>
+    </div>
+
+    <!-- Canvas for confetti animation -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- App Script -->
+    <script src="app.js"></script>
+</body>
+</html>
